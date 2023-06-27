@@ -14,12 +14,19 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/bionic64"
   config.vm.box_version = "~> 20230607.0.0"
- 
+
+ # config.vm.boot_timeout = "1440"
+
+  #config.vm.provider :virtualbox do |vb|
+ #   vb.gui = true
+ # end
+
   config.vm.network "forwarded_port", guest: 8000, host: 8000
  
   config.vm.provision "shell", inline: <<-SHELL
     systemctl disable apt-daily.service
     systemctl disable apt-daily.timer
+    
   
     sudo apt-get update
     sudo apt-get install -y python3-venv zip
